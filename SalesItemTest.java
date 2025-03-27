@@ -49,6 +49,16 @@ public class SalesItemTest
         assertEquals(1, salesIte1.getNumberOfComments());
     }
 
+    //Question 15
+    @Test
+    public void testAddCommentSameAuthor()
+    {
+        SalesItem salesIte1 = new SalesItem("Brain surgery for Dummies", 21998);
+        assertEquals(true, salesIte1.addComment("James Duckling", "This book is great. I perform brain surgery every week now.", 4));
+        assertEquals(false, salesIte1.addComment("James Duckling", "", 2));
+        assertEquals(1, salesIte1.getNumberOfComments());
+    }
+    
     /**
      * Test that a comment using an illegal rating value is rejected.
      */
@@ -57,6 +67,22 @@ public class SalesItemTest
     {
         SalesItem salesIte1 = new SalesItem("Java For Complete Idiots, Vol 2", 19900);
         assertEquals(false, salesIte1.addComment("Joshua Black", "Not worth the money. The font is too small.", -5));
+    }
+    
+    //Question 16
+    @Test
+    public void testIllegalRatingLow()
+    {
+        SalesItem salesIte1 = new SalesItem("Java For Complete Idiots, Vol 2", 19900);
+        assertEquals(false, salesIte1.addComment("Joshua Black", "", 0));
+    }
+    
+    //Question 16
+    @Test
+    public void testIllegalRatingHigh()
+    {
+        SalesItem salesIte1 = new SalesItem("Java For Complete Idiots, Vol 2", 19900);
+        assertEquals(false, salesIte1.addComment("Joshua Black", "", 6));
     }
 
     /**
@@ -76,7 +102,19 @@ public class SalesItemTest
         SalesItem salesIte1 = new SalesItem("Brain Surgery for Dummies.", 9899);
         assertEquals(true, salesIte1.addComment("Fred", "Great - I perform brain surgery every week now!", 4));
     }
+    
+    // Question 19
+    @Test
+    public void testFindMostHelpfulComment()
+    {
+        SalesItem salesIte1 = new SalesItem("book", 2500);
+        salesIte1.addComment("chloe", "very good", 5);
+        salesIte1.upvoteComment(0);
+        Comment comment1 = salesIte1.findMostHelpfulComment();
+        assertEquals(1, comment1);
+    }
 }
+
 
 
 
