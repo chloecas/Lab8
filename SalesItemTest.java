@@ -95,25 +95,39 @@ public class SalesItemTest
         assertEquals("test name", salesIte1.getName());
         assertEquals(1000, salesIte1.getPrice());
     }
-
+    
     @Test
     public void addComment()
     {
         SalesItem salesIte1 = new SalesItem("Brain Surgery for Dummies.", 9899);
         assertEquals(true, salesIte1.addComment("Fred", "Great - I perform brain surgery every week now!", 4));
     }
-    
-    // Question 19
+   
+    //Question 20
+    @Test
+    public void testRemoveComment()
+    {
+        SalesItem salesIte1 = new SalesItem("book", 2500);
+        salesIte1.addComment("chloe", "too expensive", 2);
+        salesIte1.removeComment(0);
+        assertEquals(0, salesIte1.getNumberOfComments());
+    }
+
+    //Question 19
     @Test
     public void testFindMostHelpfulComment()
     {
         SalesItem salesIte1 = new SalesItem("book", 2500);
-        salesIte1.addComment("chloe", "very good", 5);
+        salesIte1.addComment("chloe", "loved", 5);
         salesIte1.upvoteComment(0);
-        Comment comment1 = salesIte1.findMostHelpfulComment();
-        assertEquals(1, comment1);
+        salesIte1.upvoteComment(0);
+        assertEquals("loved", salesIte1.findMostHelpfulComment());
     }
 }
+
+
+
+
 
 
 

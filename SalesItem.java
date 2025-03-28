@@ -115,9 +115,13 @@ public class SalesItem
         System.out.println("Price: " + priceString(price));
         System.out.println();
         System.out.println("Customer comments:");
-        for(Comment comment : comments) {
+        //Question 21
+        int index= 0;
+        while(index < comments.size()) {
+            Comment comment = comments.get(index);
             System.out.println("-------------------------------------------");
             System.out.println(comment.getFullDetails());
+            index++;
         }
         System.out.println();
         System.out.println("===========================================");
@@ -127,22 +131,24 @@ public class SalesItem
      * Return the most helpful comment. The most useful comment is the one with the highest vote
      * balance. If there are multiple comments with equal highest balance, return any one of
      * them.
+     * */
      
     public Comment findMostHelpfulComment()
     {
     Iterator<Comment> it = comments.iterator();
-    Comment best = null;
+        Comment best = null;
         if(comments.size() != 0) {
-            Comment best = it.hasNext();
+            best = it.next();
             while(it.hasNext()) {
                 Comment current = it.next();
                     if(current.getVoteCount() > best.getVoteCount()) {
                         best = current;
                 }
             }
-            return best;
     }
-    */
+    return best;
+    }
+
     
     /**
      * Check whether the given rating is invalid. Return true if it is invalid.
@@ -161,10 +167,15 @@ public class SalesItem
      */
     private Comment findCommentByAuthor(String author)
     {
-        for(Comment comment : comments) {
+        //Question 21
+        int index = 0; 
+        while(index < comments.size())
+        {
+            Comment comment = comments.get(index);
             if(comment.getAuthor().equals(author)) {
                 return comment;
             }
+            index++;
         }
         return null;
     }
